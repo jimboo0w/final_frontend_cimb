@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>CIMB Niaga - Personal Banking</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/cimb-favicon.svg" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar bg-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="logocimb" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars ms-1"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+          <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link active" href="todos.html">Todos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Todos -->
+  <section class="page-section" id="todos">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-heading text-uppercase">Todos</h2>
+        <h3 class="section-subheading text-muted">Todos</h3>
+      </div>
+      <form action="javascript:void(0);" method="POST" onkeyup="filterName()">
+        <div>
+          <label for="filterSearch">Filter</label>
+          <input type="text" id="filterSearch" name="filterSearch" placeholder="Cari Nama">
+          <!-- <input type="submit" name="submitSearch" id="submitSearch"> -->
+        </div>
+      </form>
+      <div style="margin-left: 10px;">
+        <table id="example" class="table table-striped" style="width:100%;">
+          <thead style="text-align: center;">
+            <tr>
+              <th>No.</th>
+              <th>Nama</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Account Type</th>
+              <th>Address</th>
+              <th>Status</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="data">
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer-->
+  <footer class="footer py-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-4 text-lg-start"><img src="./assets/img/logo-67-red.png" width="80px" alt="logo 67">Copyright
+          &copy; CIMB Niaga 2022</div>
+        <div class="col-lg-4 my-3 my-lg-0">
+          <a class="btn btn-dark btn-social mx-2" href="https://twitter.com/cimbniaga" aria-label="Twitter"><i
+              class="fab fa-twitter"></i></a>
+          <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/CIMBIndonesia" aria-label="Facebook"><i
+              class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/company/pt--bank-cimb-niaga-tbk/"
+            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <p>PT Bank CIMB Niaga Tbk Berizin & Diawasi oleh Otoritas Jasa Keuangan serta merupakan Peserta Penjaminan LPS
+          </p>
+          <!-- <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a> -->
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    var inputUser = prompt("Masukkan Username Anda");
+    var inputPass = prompt("Masukkan Password Anda");
+    // var inputPin  = prompt("Masukkan PIN Anda");
+    var user = "admin"
+    var pass = "admin";
+    // var pin  = 272727;
+
+    // if (inputUser == "admin" && inputPass == "admin") {
+    //   alert("Password benar! Welcome");
+    // } else {
+    //   // window.location = 'http://www.google.com';
+    //   window.location = "./index.html";
+    // }
+
+    (inputUser == "admin" && inputPass === "admin") ? alert("Password benar! Welcome") : window.location = "./index.html";
+
+    function showData(item) {
+      let listData = document.getElementById("data");
+      // bersihkan data
+      listData.innerHTML = "";
+      // print semua data
+      var retrievedObject = localStorage.getItem('saveData');
+      // let a = JSON.parse(retrievedObject)
+      let x = JSON.parse(retrievedObject)
+      if (item != null) {
+        item.forEach((a, i) => {
+          listData.innerHTML += "<tr>" +
+            "<td>" + (i + 1) + "</td>" +
+            "<td>" + a.nama + "</td>" +
+            "<td>" + a.email + "</td>" +
+            "<td>" + a.phone + "</td>" +
+            "<td>" + a.account + "</td>" +
+            "<td>" + a.address + "</td>" +
+            "<td>" + a.done + "</td>" +
+            "<td><button class='btn btn-info' onclick='editData(" + i + "," + a.id + ")'>Edit</button></td>" +
+            "<td><button class='btn btn-danger' onclick='deleteData(" + i + "," + a.id + ")'>Delete</button></td>" +
+            "</tr>";
+        });
+      } else {
+        x.forEach((a, i) => {
+          listData.innerHTML += "<tr>" +
+            "<td>" + (i + 1) + "</td>" +
+            "<td>" + a.nama + "</td>" +
+            "<td>" + a.email + "</td>" +
+            "<td>" + a.phone + "</td>" +
+            "<td>" + a.account + "</td>" +
+            "<td>" + a.address + "</td>" +
+            "<td>" + a.done + "</td>" +
+            "<td><button class='btn btn-info' onclick='editData(" + i + "," + a.id + ")'>Edit</button></td>" +
+            "<td><button class='btn btn-danger' onclick='deleteData(" + i + "," + a.id + ")'>Delete</button></td>" +
+            "</tr>";
+        });
+
+      }
+
+      // for (let i = 0; i < a.length; i++) {
+      //   listData.innerHTML += "<tr>" +
+      //     "<td>" + (i + 1) + "</td>" +
+      //     "<td>" + a[i].nama + "</td>" +
+      //     "<td>" + a[i].email + "</td>" +
+      //     "<td>" + a[i].phone + "</td>" +
+      //     "<td>" + a[i].account + "</td>" +
+      //     "<td>" + a[i].address + "</td>" +
+      //     "<td><button class='btn btn-info' onclick='edit(" + i + ")'>Edit</button></td>"+
+      //     "<td><button class='btn btn-danger' onclick='edit(" + i + ")'>Delete</button></td>"+
+      //     "</tr>";
+      // }
+    };
+    showData();
+
+    function editData(item, id) {
+      let listData = localStorage.getItem('saveData');
+      let x = JSON.parse(listData)
+
+      a = x[item];
+
+      var edit = prompt("Status Done/Undone");
+
+      if (edit) {
+        for (var i = 0; i < x.length; i++) {
+          if (x[i].id == id) {  //look for match with name
+            x[i].done = edit;
+            break;  //exit loop since you found the person
+          }
+        }
+        localStorage.setItem("saveData", JSON.stringify(x));
+        showData();
+      }
+      else {
+        showData();
+      }
+    }
+
+    function deleteData(item, id) {
+      let listData = localStorage.getItem('saveData');
+      let x = JSON.parse(listData)
+      a = x[item];
+      var del = prompt("Delete? Yes or No");
+      var index = x.map(x => {
+        return x.id;
+      }).indexOf(id);
+
+      console.log(index)
+      if (del == 'yes') {
+        for (var i = 0; i < x.length; i++) {
+          if (x[i].id == id) {  //look for match with name
+            // console.log(x[i].id, 'ajaja');
+            // console.log(id, 'ini id');
+
+            x.splice(index, 1)
+            localStorage.setItem("saveData", JSON.stringify(x));
+            showData();
+            break;  //exit loop since you found the person
+          }
+        }
+      }
+      else {
+        showData();
+      }
+    }
+
+    function filterList(listSearch) {
+      let searchName = document.getElementById("filterSearch").value;
+      let tempVar = listSearch.nama;
+
+      if (tempVar.includes(searchName)) {
+        return tempVar;
+      }
+    }
+
+    function filterName() {
+      var retrievedObject = localStorage.getItem('saveData');
+      let x = JSON.parse(retrievedObject)
+      let search = document.getElementById("filterSearch").value;
+
+      list = x.filter(filterList);
+      if (search !== null) {
+        list = x.filter(filterList);
+        if (list.length == 0) {
+          showData(list);
+        } else {
+          showData(list);
+        }
+      }
+      else {
+        document.getElementById("listData").innerHTML = "";
+        showData();
+      }
+    }
+  </script>
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <!-- <script src="js/scripts.js"></script> -->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- * *                               SB Forms JS                               * *-->
+  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+</body>
+
+</html>
